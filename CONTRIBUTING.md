@@ -1,11 +1,11 @@
-# 🚀 Contributing Guide
+# Contributing Guide
 
 Welcome! We’re excited that you want to contribute to this project.  
-This guide explains everything you need to know — from forking the repository to getting your pull request merged.
+This guide explains everything you need to know, from forking the repository to getting your pull request merged.
 
 ---
 
-## ⭐ What Does “Contributing” Mean?
+## What Does “Contributing” Mean?
 
 Contributing means helping improve the project by:
 
@@ -18,12 +18,14 @@ Contributing means helping improve the project by:
 
 ---
 
-## 🧩 Before You Start
+## Before You Start
 
 ### 1️⃣ Fork the Repository  
+
 This creates your own copy of the project in your GitHub account.
 
 ### 2️⃣ Clone Your Fork  
+
 Download it to your computer:
 
 ```bash
@@ -31,11 +33,12 @@ git clone https://github.com/itsdeepakkumarp/c-project.git
 ```
 
 ### 3️⃣ Dependencies  
+
 No dependencies required — this is a pure C project.
 
 ---
 
-## 🌿 Create a New Branch
+## Create a New Branch
 
 Before making any changes, create your own branch:
 
@@ -54,7 +57,7 @@ Branches keep your work organized and separate from the main project.
 
 ---
 
-## ✏️ Make Your Changes
+## Make Your Changes
 
 Inside the existing C programs, you may:
 
@@ -71,7 +74,7 @@ Keep your changes **small, focused, and clean**.
 
 ---
 
-## 🧪 Test Your Changes
+## Test Your Changes
 
 Before committing:
 
@@ -84,7 +87,7 @@ Manual testing is enough.
 
 ---
 
-## 💾 Stage Your Changes (git add)
+## Stage Your Changes (git add)
 
 You must stage files before committing.
 
@@ -104,7 +107,7 @@ Use whichever fits your workflow.
 
 ---
 
-## 📝 Commit Your Changes
+## Commit Your Changes
 
 Save your progress with a meaningful commit message:
 
@@ -120,7 +123,7 @@ Improve input validation in Student Management System
 
 ---
 
-## 🚀 Push Your Branch
+## Push Your Branch
 
 Send your changes to GitHub:
 
@@ -130,7 +133,7 @@ git push origin my-feature
 
 ---
 
-## 🔄 Open a Pull Request (PR)
+## Open a Pull Request (PR)
 
 After pushing your branch:
 
@@ -145,15 +148,15 @@ Clear, well-written PRs are merged faster.
 
 ---
 
-## 👀 Code Review
+## Code Review
 
 A project maintainer will:
 
 - Review your code  
 - Suggest improvements (normal!)  
-- Approve and merge your PR 🎉  
+- Approve and merge your PR.  
 
-Don’t worry if you're asked to make changes — it's part of the process.
+Don’t worry if you're asked to make changes, it's part of the process.
 
 ---
 
@@ -168,4 +171,4 @@ Don’t worry if you're asked to make changes — it's part of the process.
 
 ---
 
-## Happy coding! 🚀
+## Happy coding! 
