@@ -29,7 +29,7 @@ This creates your own copy of the project in your GitHub account.
 Download it to your computer:
 
 ```bash
-git clone https://github.com/itsdeepakkumarp/c-project.git
+git clone https://github.com/<username>/c-project.git
 ```
 
 ### 3️⃣ Dependencies  
