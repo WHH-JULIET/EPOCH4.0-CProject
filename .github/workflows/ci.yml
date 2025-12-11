@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  # Job 1: CI (Build, Test, and Create Artifact) - Compiles each C file
+  # Job 1: CI (Build, Test, and Create Artifact)
   build_c_project:
     runs-on: ubuntu-latest
     
@@ -19,13 +19,9 @@ jobs:
         # Ensures that the GCC compiler and related tools are available
         run: sudo apt-get update && sudo apt-get install -y build-essential
         
-      # CORE FIX: Compile and test each individual C file
+      # CORE FIX: Compile, run with timeout, and test each individual C file
       - name: Compile and Test Individual C Programs
         run: |
-          # The Bash script below iterates through all files ending in .c
-          # If any single compilation fails, the 'exit 1' command will immediately
-          # fail this step, and the entire pipeline will stop.
-          
           echo "Starting compilation and testing for all C files..."
           
           # Loop through every C file in the directory
@@ -40,12 +36,15 @@ jobs:
             
             # $? holds the exit status of the previous command (gcc). 0 means success.
             if [ $? -eq 0 ]; then
-              echo "SUCCESS: $c_file compiled. Running smoke test..."
+              echo "SUCCESS: $c_file compiled. Running smoke test with 1s timeout..."
               
-              # Execute the compiled program
-              ./$project_name
+              # *** THE KEY FIX ***
+              # 'timeout 1s' runs the program for 1 second. It will start, 
+              # print its menu, and then be forcefully stopped, preventing it
+              # from stalling the pipeline while waiting for keyboard input.
+              timeout 1s ./$project_name
               
-              # We save one of the executables for the next CD step (optional)
+              # Optional: Save the 'todo' executable for the CD job
               if [ "$project_name" == "todo" ]; then
                 cp todo todo_app_for_deploy
               fi
@@ -59,7 +58,7 @@ jobs:
           done
           echo "All C projects successfully compiled and tested!"
           
-      # Since we only upload one artifact, we choose the 'todo' project as an example
+      # Upload the selected executable as an artifact for the next job
       - name: Upload one compiled executable as artifact for CD
         uses: actions/upload-artifact@v4
         with:
@@ -81,9 +80,7 @@ jobs:
           
       - name: Verify artifact and simulate deployment
         run: |
-          # 'ls -l' confirms the downloaded file ('todo_app_for_deploy') is present
           ls -l 
           echo "--- Beginning Continuous Deployment ---"
           echo "Deploying verified 'todo_app_for_deploy' to staging environment..."
-          # This is the point where you would add your actual deployment commands (SCP, AWS CLI, etc.)
           echo "SUCCESS: Deployment simulation complete."
