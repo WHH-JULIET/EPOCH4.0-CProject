@@ -16,49 +16,51 @@ jobs:
         uses: actions/checkout@v4 
         
       - name: Install C compiler tools
-        # Ensures that the GCC compiler and related tools are available
         run: sudo apt-get update && sudo apt-get install -y build-essential
         
-      # CORE FIX: Compile, run with timeout, and test each individual C file
+      # CORE FIX: Compile, run with timeout, and handle the 124 exit code
       - name: Compile and Test Individual C Programs
         run: |
           echo "Starting compilation and testing for all C files..."
           
-          # Loop through every C file in the directory
           for c_file in *.c; do
-            # project_name will be the file name without the .c extension (e.g., 'contact')
             project_name=$(basename $c_file .c)
             
             echo "--- Compiling $c_file to $project_name ---"
             
-            # Compile the single C file into an executable named after the project
             gcc -o $project_name $c_file
             
-            # $? holds the exit status of the previous command (gcc). 0 means success.
+            # Check if COMPILATION succeeded
             if [ $? -eq 0 ]; then
               echo "SUCCESS: $c_file compiled. Running smoke test with 1s timeout..."
               
-              # *** THE KEY FIX ***
-              # 'timeout 1s' runs the program for 1 second. It will start, 
-              # print its menu, and then be forcefully stopped, preventing it
-              # from stalling the pipeline while waiting for keyboard input.
+              # Run the executable with a 1-second timeout
               timeout 1s ./$project_name
               
-              # Optional: Save the 'todo' executable for the CD job
-              if [ "$project_name" == "todo" ]; then
-                cp todo todo_app_for_deploy
+              # Get the exit code of the 'timeout' command
+              exit_code=$?
+
+              # Check for acceptable exit codes: 0 (normal exit) or 124 (timeout exit)
+              if [ $exit_code -eq 0 ] || [ $exit_code -eq 124 ]; then
+                echo "Smoke test passed (Exit code: $exit_code)."
+                
+                # Optional: Save the 'todo' executable for the CD job
+                if [ "$project_name" == "todo" ]; then
+                  cp todo todo_app_for_deploy
+                fi
+              else
+                echo "Smoke test FAILED with unexpected exit code: $exit_code"
+                exit 1 # Fail the job if the program crashed or failed
               fi
               
               echo "-----------------------------------"
             else
               echo "FAILURE: $c_file compilation failed!"
-              # Crucially, exit with code 1 to fail the GitHub Action job
               exit 1 
             fi
           done
           echo "All C projects successfully compiled and tested!"
           
-      # Upload the selected executable as an artifact for the next job
       - name: Upload one compiled executable as artifact for CD
         uses: actions/upload-artifact@v4
         with:
@@ -68,7 +70,6 @@ jobs:
 
   # Job 2: CD (Deployment) - Only runs if Job 1 succeeds
   deploy:
-    # This ensures deployment only happens with successfully built code
     needs: build_c_project 
     runs-on: ubuntu-latest
     
