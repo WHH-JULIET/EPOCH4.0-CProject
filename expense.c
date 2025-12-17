@@ -65,18 +65,18 @@ int main() {
                 sortExpenses(expenses, count);
                 break;
             case 7:
-                printf("\n💰 Total Expenses: $%.2f\n", calculateTotal(expenses, count));
+                printf("\nTotal Expenses: $%.2f\n", calculateTotal(expenses, count));
                 break;
             case 8:
                 saveToFile(expenses, count);
-                printf("\n✅ Data saved successfully!\n");
+                printf("\nData saved successfully!\n");
                 break;
             case 9:
                 saveToFile(expenses, count);
-                printf("\n👋 Goodbye! Data saved automatically.\n");
+                printf("\nGoodbye! Data saved automatically.\n");
                 return 0;
             default:
-                printf("\n❌ Invalid choice! Please try again.\n");
+                printf("\nInvalid choice! Please try again.\n");
         }
     }
 }
@@ -85,15 +85,15 @@ void displayMenu() {
     printf("\n==========================================\n");
     printf("           EXPENSE TRACKER MENU          \n");
     printf("==========================================\n");
-    printf("1. 📝 Add New Expense\n");
-    printf("2. 📋 View All Expenses\n");
-    printf("3. ✏️  Edit Expense\n");
-    printf("4. 🗑️  Remove Expense\n");
-    printf("5. 🔍 Search Expenses\n");
-    printf("6. 📊 Sort Expenses\n");
-    printf("7. 💰 View Total\n");
-    printf("8. 💾 Save Data\n");
-    printf("9. 🚪 Exit\n");
+    printf("1. Add New Expense\n");
+    printf("2. View All Expenses\n");
+    printf("3. Edit Expense\n");
+    printf("4. Remove Expense\n");
+    printf("5. Search Expenses\n");
+    printf("6. Sort Expenses\n");
+    printf("7. View Total\n");
+    printf("8. Save Data\n");
+    printf("9. Exit\n");
     printf("==========================================\n");
     printf("Enter your choice (1-9): ");
 }
@@ -101,7 +101,7 @@ void displayMenu() {
 int getChoice() {
     int choice;
     while (scanf("%d", &choice) != 1) {
-        printf("❌ Invalid input! Please enter a number: ");
+        printf("Invalid input! Please enter a number: ");
         clearInputBuffer();
     }
     clearInputBuffer();
@@ -110,7 +110,7 @@ int getChoice() {
 
 void addExpense(struct Expense *exp, int *count) {
     if (*count >= MAX_EXPENSES) {
-        printf("\n❌ Maximum expense limit reached!\n");
+        printf("\nMaximum expense limit reached!\n");
         return;
     }
 
@@ -140,12 +140,12 @@ void addExpense(struct Expense *exp, int *count) {
     exp[*count] = newExp;
     (*count)++;
     
-    printf("\n✅ Expense added successfully!\n");
+    printf("\nExpense added successfully!\n");
 }
 
 void viewExpenses(struct Expense *exp, int count) {
     if (count == 0) {
-        printf("\n📭 No expenses recorded yet.\n");
+        printf("\nNo expenses recorded yet.\n");
         return;
     }
     
@@ -165,7 +165,7 @@ void viewExpenses(struct Expense *exp, int count) {
 
 void editExpense(struct Expense *exp, int count) {
     if (count == 0) {
-        printf("\n📭 No expenses to edit.\n");
+        printf("\nNo expenses to edit.\n");
         return;
     }
     
@@ -198,16 +198,16 @@ void editExpense(struct Expense *exp, int count) {
             fgets(exp[i].date, 11, stdin);
             removeNewline(exp[i].date);
             
-            printf("\n✅ Expense updated successfully!\n");
+            printf("\nExpense updated successfully!\n");
             return;
         }
     }
-    printf("\n❌ Expense ID not found!\n");
+    printf("\nExpense ID not found!\n");
 }
 
 void removeExpense(struct Expense *exp, int *count) {
     if (*count == 0) {
-        printf("\n📭 No expenses to remove.\n");
+        printf("\nNo expenses to remove.\n");
         return;
     }
     
@@ -222,16 +222,16 @@ void removeExpense(struct Expense *exp, int *count) {
                 exp[j] = exp[j + 1];
             }
             (*count)--;
-            printf("\n✅ Expense removed successfully!\n");
+            printf("\nExpense removed successfully!\n");
             return;
         }
     }
-    printf("\n❌ Expense ID not found!\n");
+    printf("\nExpense ID not found!\n");
 }
 
 void searchExpense(struct Expense *exp, int count) {
     if (count == 0) {
-        printf("\n📭 No expenses to search.\n");
+        printf("\nNo expenses to search.\n");
         return;
     }
     
@@ -252,15 +252,15 @@ void searchExpense(struct Expense *exp, int count) {
     }
     
     if (!found) {
-        printf("❌ No matching expenses found.\n");
+        printf("No matching expenses found.\n");
     } else {
-        printf("\n✅ Found %d matching expense(s).\n", found);
+        printf("\nFound %d matching expense(s).\n", found);
     }
 }
 
 void sortExpenses(struct Expense *exp, int count) {
     if (count == 0) {
-        printf("\n📭 No expenses to sort.\n");
+        printf("\nNo expenses to sort.\n");
         return;
     }
     
@@ -292,7 +292,7 @@ void sortExpenses(struct Expense *exp, int count) {
         }
     }
     
-    printf("\n✅ Expenses sorted successfully!\n");
+    printf("\nExpenses sorted successfully!\n");
     viewExpenses(exp, count);
 }
 
@@ -307,7 +307,7 @@ float calculateTotal(struct Expense *exp, int count) {
 void saveToFile(struct Expense *exp, int count) {
     FILE *file = fopen(FILENAME, "w");
     if (!file) {
-        printf("\n❌ Error saving to file!\n");
+        printf("\nError saving to file!\n");
         return;
     }
     
@@ -345,7 +345,7 @@ void clearInputBuffer() {
 
 int validateAmount(float amount) {
     if (amount <= 0) {
-        printf("❌ Amount must be positive! Try again.\n");
+        printf("Amount must be positive! Try again.\n");
         return 0;
     }
     return 1;
