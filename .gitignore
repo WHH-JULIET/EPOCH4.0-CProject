@@ -1,0 +1,17 @@
+# Compiled executables
+*.exe
+*.out
+*.o
+*.obj
+
+# IDE files
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Data files
+expenses.txt
