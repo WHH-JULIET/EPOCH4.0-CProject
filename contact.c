@@ -14,6 +14,8 @@ void loadContacts(struct Contact list[], int *count);
 void saveContacts(struct Contact list[], int count);
 void addContact(struct Contact list[], int *count);
 void viewContacts(struct Contact list[], int count);
+void deleteContact(struct Contact list[], int *count);
+
 
 int main() {
     struct Contact list[MAX];
@@ -27,7 +29,8 @@ int main() {
         printf("\n--- CONTACT BOOK ---\n");
         printf("1. Add Contact\n");
         printf("2. View Contacts\n");
-        printf("3. Exit\n");
+        printf("3. Delete Contact\n");
+        printf("4. Exit\n");
         printf("Enter choice: ");
 
         if (scanf("%d", &choice) != 1) {
@@ -44,6 +47,9 @@ int main() {
                 viewContacts(list, count);
                 break;
             case 3:
+                deleteContact(list, &count);
+                break;
+            case 4:
                 saveContacts(list, count);
                 printf("Contacts saved. Exiting...\n");
                 return 0;
@@ -115,4 +121,28 @@ void viewContacts(struct Contact list[], int count) {
         printf("%d. %s - %s\n", i + 1, list[i].name, list[i].phone);
     }
 }
+void deleteContact(struct Contact list[], int *count) {
+    int index;
 
+    if (*count == 0) {
+        printf("No contacts to delete.\n");
+        return;
+    }
+
+    viewContacts(list, *count);
+
+    printf("Enter contact number to delete: ");
+    if (scanf("%d", &index) != 1 || index < 1 || index > *count) {
+        printf("Invalid choice.\n");
+        while (getchar() != '\n');
+        return;
+    }
+
+    for (int i = index - 1; i < *count - 1; i++) {
+        list[i] = list[i + 1];
+    }
+
+    (*count)--;
+
+    printf("Contact deleted successfully.\n");
+}
