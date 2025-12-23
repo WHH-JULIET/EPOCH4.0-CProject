@@ -14,8 +14,8 @@ This repository currently contains the following C mini-programs:
 - [To-Do List App](https://github.com/github-community-gitam/EPOCH4.0-CProject/blob/main/todo.c)
 - [Quiz Game](https://github.com/github-community-gitam/EPOCH4.0-CProject/blob/main/quiz.c)
 - [Contact Book](https://github.com/github-community-gitam/EPOCH4.0-CProject/blob/main/contact.c)
-- **Expense Tracker**
-- **Student Management System**
+- [Expense Tracker](https://github.com/github-community-gitam/EPOCH4.0-CProject/blob/main/expense.c)
+- [Student Management System](https://github.com/github-community-gitam/EPOCH4.0-CProject/blob/main/student.c)
 
 These programs are structured in a simple and beginner-friendly way so contributors can easily:
 
