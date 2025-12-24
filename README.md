@@ -16,6 +16,9 @@ This repository currently contains the following C mini-programs:
 - [Contact Book](https://github.com/github-community-gitam/EPOCH4.0-CProject/blob/main/contact.c)
 - [Expense Tracker](https://github.com/github-community-gitam/EPOCH4.0-CProject/blob/main/expense.c)
 - [Student Management System](https://github.com/github-community-gitam/EPOCH4.0-CProject/blob/main/student.c)
+- [Loan Management System](https://github.com/github-community-gitam/EPOCH4.0-CProject/blob/main/loan.c)
+
+- A folder for basic problems : [basic-problems](https://github.com/github-community-gitam/EPOCH4.0-CProject/tree/main/basic-problems)
 
 ---
 
